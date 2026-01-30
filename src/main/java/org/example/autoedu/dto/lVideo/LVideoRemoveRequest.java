@@ -1,0 +1,11 @@
+package org.example.autoedu.dto.lVideo;
+
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class LVideoRemoveRequest {
+    private Integer lessonId;
+    private Integer lessonVideoId;
+}
