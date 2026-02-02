@@ -7,8 +7,8 @@ import org.example.autoedu.dto.subscription.SubscribeResponse;
 
 @Data
 @Builder
-public class SubscribeCourseResponse {
+public class SubscribeCourseFullResponse {
     private Integer id;
-    private SubscribeResponse subscribe;
-    private CourseResponse course;
+    private SubscribeResponse subscribe;  // obuna paketi
+    private CourseResponse course;        // kurs ma'lumotlari
 }

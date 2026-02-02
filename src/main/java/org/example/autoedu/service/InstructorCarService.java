@@ -39,7 +39,7 @@ public class InstructorCarService {
                 .fullName(request.getFullName())
                 .photo(request.getPhoto())
                 .number(request.getNumber())
-//   todo             .instructorId(request.getInstructorId())
+            .instruktorId(request.getInstructorId())
                 .build();
 
         InstructorCar saved = instructorCarRepository.save(car);
@@ -73,7 +73,7 @@ public class InstructorCarService {
                 .fullName(entity.getFullName())
                 .photo(entity.getPhoto())
                 .number(entity.getNumber())
-              //  .instructorId(entity.getInstructorId())
+               .instructorId(entity.getInstruktorId())
                 .build();
     }
 }

@@ -22,8 +22,6 @@ public class UploadedFile {
     private String contentType;
     private Long fileSize;
 
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
     private byte[] data;
 
     private String filePath;

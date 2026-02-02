@@ -10,7 +10,15 @@ import java.util.Optional;
 @Repository
 public interface UserCarRepository extends JpaRepository<UserCar, Integer> {
 
-    List<UserCar> findByUserIdCarsId(Integer userId);
+    // user_id_cars_id bo'yicha qidirish (Spring Data camelCase ishlatadi)
+    List<UserCar> findByUserIdCarsId(Integer userIdCarsId);
 
-    Optional<UserCar> findByUserIdCarsIdAndInstructorCarsId(Integer userId, Integer instructorCarId);
+    // ikkala maydon bo'yicha aniq topish
+    Optional<UserCar> findByUserIdCarsIdAndInstructorCarsId(Integer userIdCarsId, Integer instructorCarsId);
+
+    // mavjudligini tekshirish
+    boolean existsByUserIdCarsIdAndInstructorCarsId(Integer userIdCarsId, Integer instructorCarsId);
+
+    // o'chirish uchun
+    void deleteByUserIdCarsIdAndInstructorCarsId(Integer userIdCarsId, Integer instructorCarsId);
 }

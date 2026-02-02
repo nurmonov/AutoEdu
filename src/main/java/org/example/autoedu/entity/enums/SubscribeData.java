@@ -2,5 +2,5 @@ package org.example.autoedu.entity.enums;
 
 
 public enum SubscribeData {
-    ONEMonth, THREEMONTH,SIXMONTH
+    WEEKLY, MONTHLY, QUARTERLY, HALF_YEARLY, YEARLY
 }

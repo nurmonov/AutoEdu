@@ -34,7 +34,7 @@ public class AuthService {
         }
 
 
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(
+        UserDetails userDetails =  new org.springframework.security.core.userdetails.User(
                 user.getPhoneNumber(),
                 user.getPassword(),
                 user.getAuthorities()

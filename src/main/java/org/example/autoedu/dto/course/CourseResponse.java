@@ -1,11 +1,15 @@
 package org.example.autoedu.dto.course;
 
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class CourseResponse {
     private Integer id;
     private String fullName;

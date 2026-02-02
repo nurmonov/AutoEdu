@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.autoedu.dto.lVideo.LVideoAddRequest;
 import org.example.autoedu.dto.lVideo.LVideoRemoveRequest;
 import org.example.autoedu.dto.lVideo.LVideoResponse;
+import org.example.autoedu.dto.lVideo.LessonVideoFullResponse;
 import org.example.autoedu.service.LVideoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,15 +28,15 @@ public class LVideoController {
 
     @Operation(summary = "Bitta darsga qo'shilgan videolarni olish")
     @GetMapping("/lesson/{lessonId}")
-    public ResponseEntity<List<LVideoResponse>> getVideosByLesson(@PathVariable Integer lessonId) {
+    public ResponseEntity<List<LessonVideoFullResponse>> getVideosByLesson(@PathVariable Integer lessonId) {
         return ResponseEntity.ok(lVideoService.getVideosByLesson(lessonId));
     }
 
     @Operation(summary = "Darsga yangi video qo'shish (admin)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @PostMapping
-    public ResponseEntity<LVideoResponse> addVideoToLesson(@RequestBody LVideoAddRequest request) {
-        LVideoResponse response = lVideoService.addVideoToLesson(request);
+    public ResponseEntity<LessonVideoFullResponse> addVideoToLesson(@RequestBody LVideoAddRequest request) {
+        LessonVideoFullResponse response = lVideoService.addVideoToLesson(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 

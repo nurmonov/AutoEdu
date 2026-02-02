@@ -50,7 +50,7 @@ public class UserService {
 
         // default role, masalan
         if (user.getRole() == null) {
-            user.setRole(Role.USER);
+            user.setRole(Role.STUDENT);
         }
 
         User saved = userRepository.save(user);

@@ -1,11 +1,15 @@
 package org.example.autoedu.dto.user;
 
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class UserResponse {
     private Integer id;
     private String fullName;

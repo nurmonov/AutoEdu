@@ -17,7 +17,7 @@ public interface SubscribeCourseMapper {
     SubscribeCourseResponse toResponse(SubscribeCourse entity);
     List<SubscribeCourseResponse> toResponseList(List<SubscribeCourse> entities);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "id", ignore = true)
-    void updateEntity(@MappingTarget SubscribeCourse entity, SubscribeCourseUpdateRequest dto);
+//    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+//    @Mapping(target = "id", ignore = true)
+//    void updateEntity(@MappingTarget SubscribeCourse entity, SubscribeCourseUpdateRequest dto);
 }

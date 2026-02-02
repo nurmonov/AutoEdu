@@ -15,6 +15,9 @@ public class InstructorCar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "instruktor_id")
+    private Integer instruktorId;
+
     @Column(name = "full_name")
     private String fullName;
 
@@ -22,4 +25,6 @@ public class InstructorCar {
     private String photo;
 
     private String number;
+
+
 }
