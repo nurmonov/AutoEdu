@@ -10,5 +10,4 @@ public class LessonUpdateRequest {
     private String title;
     private String description;
     private String file;
-    private Integer order;
-}
+ }

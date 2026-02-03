@@ -45,12 +45,11 @@ public class LessonService {
         Lesson lesson = lessonRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Dars topilmadi: " + id));
 
-        // Qo'lda update (mapper ishlamagan bo'lsa xavfsizroq)
+
         if (request.getFullName() != null) lesson.setFullName(request.getFullName());
         if (request.getTitle() != null) lesson.setTitle(request.getTitle());
         if (request.getDescription() != null) lesson.setDescription(request.getDescription());
         if (request.getFile() != null) lesson.setFile(request.getFile());
-        // todo if (request.getOrder() != null) lesson.setOrder(request.getOrder());
 
         Lesson updated = lessonRepository.save(lesson);
         return lessonMapper.toResponse(updated);

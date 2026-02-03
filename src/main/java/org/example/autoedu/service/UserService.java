@@ -45,10 +45,9 @@ public class UserService {
 
         User user = userMapper.toEntity(request);
 
-        // Parolni hash qilish — majburiy!
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        // default role, masalan
+
         if (user.getRole() == null) {
             user.setRole(Role.STUDENT);
         }
@@ -62,13 +61,13 @@ public class UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Foydalanuvchi topilmadi: " + id));
 
-        // Qo'lda update qilamiz — faqat null bo'lmagan maydonlarni o'zgartiramiz
+
         if (request.getFullName() != null && !request.getFullName().isBlank()) {
             user.setFullName(request.getFullName());
         }
 
         if (request.getPhoneNumber() != null && !request.getPhoneNumber().isBlank()) {
-            // telefon o'zgartirilsa, uniqueness ni tekshirish mumkin (ixtiyoriy)
+
             if (!request.getPhoneNumber().equals(user.getPhoneNumber()) &&
                     userRepository.existsByPhoneNumber(request.getPhoneNumber())) {
                 throw new IllegalArgumentException("Bu telefon raqami allaqachon ishlatilmoqda");
@@ -96,18 +95,15 @@ public class UserService {
             user.setSeriaRaqam(request.getSeriaRaqam());
         }
 
-        // Yangi parol kiritilgan bo'lsa — hash qilamiz
+
         if (request.getNewPassword() != null && !request.getNewPassword().isBlank()) {
             user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         }
 
-        // Role va statusni o'zgartirishni cheklash mumkin (masalan faqat admin o'zgartirsin)
-        // Agar kerak bo'lsa shu joyga qo'shing:
-        // if (request.getRole() != null) { user.setRole(request.getRole()); }
-        // if (request.getStatus() != null) { user.setStatus(request.getStatus()); }
+
 
         User updated = userRepository.save(user);
-        return userMapper.toResponse(updated);  // response uchun mapperdan foydalanamiz
+        return userMapper.toResponse(updated);
     }
 
     @Transactional

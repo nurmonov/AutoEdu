@@ -11,5 +11,5 @@ public class LessonResponse {
     private String description;
     private String file;
     private Integer courseId;
-    private Integer order;
+
 }

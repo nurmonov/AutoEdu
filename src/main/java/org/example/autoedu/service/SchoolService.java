@@ -36,7 +36,7 @@ public class SchoolService {
 
     @Transactional
     public SchoolResponse createSchool(SchoolCreateRequest request) {
-        // telefon raqami mavjudligini tekshirish (masalan)
+
         if (request.getPhoneNumber() != null &&
                 schoolRepository.existsByPhoneNumber(request.getPhoneNumber())) {
             throw new IllegalArgumentException("Bu telefon raqami bilan maktab allaqachon mavjud");
@@ -66,7 +66,7 @@ public class SchoolService {
         schoolRepository.deleteById(id);
     }
 
-    // qo'shimcha misol metod (agar kerak bo'lsa)
+
     @Transactional(readOnly = true)
     public List<SchoolResponse> findActiveSchools() {
         return schoolMapper.toResponseList(schoolRepository.findByStatus("active"));

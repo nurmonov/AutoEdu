@@ -5,6 +5,7 @@ import org.example.autoedu.repo.UserRepository;
 import org.example.autoedu.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -44,7 +45,10 @@ public class SecurityConfig {
                                 "/api/auth/**",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**"
+
                         ).permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
                         .requestMatchers("/api/admin/**")
                         .hasRole("SUPER_ADMIN")
                         .anyRequest().authenticated()
@@ -81,18 +85,19 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedMethods(
-                List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")
-        );
+        config.setAllowCredentials(true);
 
-        config.setAllowedOrigins(List.of(
-                "http://localhost:8080",
-                "http://localhost:3000",
-                "https://procuratorial-phrenetically-yessenia.ngrok-free.dev"
+        config.setAllowedOriginPatterns(List.of(
+                "http://localhost:*",
+                "https://*.ngrok-free.dev"
+        ));
+
+        config.setAllowedMethods(List.of(
+                "GET", "POST", "PUT", "DELETE", "OPTIONS"
         ));
 
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
+        config.setExposedHeaders(List.of("Authorization"));
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
@@ -100,5 +105,6 @@ public class SecurityConfig {
 
         return source;
     }
+
 
 }
