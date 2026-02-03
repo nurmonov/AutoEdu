@@ -21,45 +21,44 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/payments")
 @RequiredArgsConstructor
-@Tag(name = "Payments", description = "To'lovlar bilan ishlash")
+@Tag(name = "Payments", description = "Tulovlar bilan ishlash")
 @SecurityRequirement(name = "bearerAuth")
 public class PaymentController {
 
     private final PaymentService paymentService;
 
-    // Foydalanuvchi o'z to'lovlarini ko'radi
-    @Operation(summary = "Foydalanuvchining to'lovlari")
+    @Operation(summary = "Foydalanuvchining tulovlari")
     @GetMapping("/my-payments")
     public ResponseEntity<List<PaymentResponse>> getMyPayments(@AuthenticationPrincipal UserDetails userDetails) {
-        Integer userId = Integer.parseInt(userDetails.getUsername()); // phoneNumberdan userId olish kerak bo'lsa
+        Integer userId = Integer.parseInt(userDetails.getUsername());
         return ResponseEntity.ok(paymentService.getPaymentsByUser(userId));
     }
 
-    // Admin barcha to'lovlarni ko'radi
-    @Operation(summary = "Barcha to'lovlar (admin)")
+
+    @Operation(summary = "Barcha tulovlar (admin)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @GetMapping
     public ResponseEntity<List<PaymentResponse>> getAllPayments() {
         return ResponseEntity.ok(paymentService.getAllPayments());
     }
 
-    // ID bo'yicha to'lov
-    @Operation(summary = "ID bo'yicha to'lov ma'lumotlari")
+
+    @Operation(summary = "ID buyicha to'lov ma'lumotlari")
     @GetMapping("/{id}")
     public ResponseEntity<PaymentResponse> getPaymentById(@PathVariable Integer id) {
         return ResponseEntity.ok(paymentService.getPaymentById(id));
     }
 
-    // Yangi to'lov yaratish (foydalanuvchi chek yuborganida)
-    @Operation(summary = "Yangi to'lov yaratish")
+
+    @Operation(summary = "Yangi tulov yaratish")
     @PostMapping
     public ResponseEntity<PaymentResponse> createPayment(@RequestBody PaymentCreateRequest request) {
         PaymentResponse response = paymentService.createPayment(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    // To'lov ma'lumotini yangilash (masalan chekni o'zgartirish)
-    @Operation(summary = "To'lov ma'lumotini yangilash")
+
+    @Operation(summary = "Tulov malumotini yangilash")
     @PutMapping("/{id}")
     public ResponseEntity<PaymentResponse> updatePayment(
             @PathVariable Integer id,
@@ -67,8 +66,8 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.updatePayment(id, request));
     }
 
-    // Admin tomonidan tasdiqlash
-    @Operation(summary = "To'lovni tasdiqlash (admin)")
+
+    @Operation(summary = "Tulovni tasdiqlash (admin)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @PostMapping("/{id}/confirm")
     public ResponseEntity<PaymentResponse> confirmPayment(@PathVariable Integer id) {
@@ -76,8 +75,8 @@ public class PaymentController {
         return ResponseEntity.ok(response);
     }
 
-    // Admin tomonidan rad etish
-    @Operation(summary = "To'lovni rad etish (admin)")
+
+    @Operation(summary = "Tulovni rad etish (admin)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @PostMapping("/{id}/reject")
     public ResponseEntity<PaymentResponse> rejectPayment(@PathVariable Integer id) {

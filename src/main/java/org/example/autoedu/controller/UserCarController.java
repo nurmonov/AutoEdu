@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user-cars")
 @RequiredArgsConstructor
-@Tag(name = "User Cars", description = "O‘quvchi va instruktor mashinasi bog‘lanishi")
+@Tag(name = "User Cars", description = "Uquvchi va instruktor mashinasi boglanishi")
 @SecurityRequirement(name = "bearerAuth")
 public class UserCarController {
 
@@ -36,7 +36,7 @@ public class UserCarController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Userdan mashinani o‘chirish")
+    @Operation(summary = "Userdan mashinani uchirish")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN', 'INSTRUCTOR')")
     @DeleteMapping
     public ResponseEntity<Void> removeCarFromUser(@RequestBody UserCarRemoveRequest request) {

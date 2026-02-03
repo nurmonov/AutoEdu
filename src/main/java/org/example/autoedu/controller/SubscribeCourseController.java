@@ -23,7 +23,7 @@ public class SubscribeCourseController {
 
     private final SubscribeCourseService subscribeCourseService;
 
-    @Operation(summary = "Obuna paketiga kurs qo'shish (admin)")
+    @Operation(summary = "Obuna paketiga kurs qushish (admin)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @PostMapping
     public ResponseEntity<SubscribeCourseResponse> addCourseToSubscribe(@RequestBody SubscribeCourseCreateRequest request) {

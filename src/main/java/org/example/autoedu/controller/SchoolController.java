@@ -49,7 +49,7 @@ public class SchoolController {
         return ResponseEntity.noContent().build();
     }
 
-    // qo'shimcha endpoint misoli
+
     @GetMapping("/active")
     public ResponseEntity<List<SchoolResponse>> getActiveSchools() {
         return ResponseEntity.ok(schoolService.findActiveSchools());

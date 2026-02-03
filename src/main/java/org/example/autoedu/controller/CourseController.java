@@ -31,13 +31,13 @@ public class CourseController {
         return ResponseEntity.ok(courseService.getAllCourses());
     }
 
-    @Operation(summary = "ID bo'yicha kurs ma'lumotini olish")
+    @Operation(summary = "ID buyicha kurs malumotini olish")
     @GetMapping("/{id}")
     public ResponseEntity<CourseResponse> getCourseById(@PathVariable Integer id) {
         return ResponseEntity.ok(courseService.getCourseById(id));
     }
 
-    @Operation(summary = "Yangi kurs qo'shish (admin uchun)")
+    @Operation(summary = "Yangi kurs qushish (admin uchun)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @PostMapping
     public ResponseEntity<CourseResponse> createCourse(@RequestBody CourseCreateRequest request) {
@@ -45,7 +45,7 @@ public class CourseController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Kurs ma'lumotini yangilash (admin uchun)")
+    @Operation(summary = "Kurs malumotini yangilash (admin uchun)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<CourseResponse> updateCourse(
@@ -54,7 +54,7 @@ public class CourseController {
         return ResponseEntity.ok(courseService.updateCourse(id, request));
     }
 
-    @Operation(summary = "Kursni o'chirish (admin uchun)")
+    @Operation(summary = "Kursni uchirish (admin uchun)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCourse(@PathVariable Integer id) {

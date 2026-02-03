@@ -26,13 +26,13 @@ public class LVideoController {
 
     private final LVideoService lVideoService;
 
-    @Operation(summary = "Bitta darsga qo'shilgan videolarni olish")
+    @Operation(summary = "Bitta darsga qushilgan videolarni olish")
     @GetMapping("/lesson/{lessonId}")
     public ResponseEntity<List<LessonVideoFullResponse>> getVideosByLesson(@PathVariable Integer lessonId) {
         return ResponseEntity.ok(lVideoService.getVideosByLesson(lessonId));
     }
 
-    @Operation(summary = "Darsga yangi video qo'shish (admin)")
+    @Operation(summary = "Darsga yangi video qushish (admin)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @PostMapping
     public ResponseEntity<LessonVideoFullResponse> addVideoToLesson(@RequestBody LVideoAddRequest request) {
@@ -40,7 +40,7 @@ public class LVideoController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Darsdan videoni o'chirish (admin)")
+    @Operation(summary = "Darsdan videoni uchirish (admin)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @DeleteMapping
     public ResponseEntity<Void> removeVideoFromLesson(@RequestBody LVideoRemoveRequest request) {

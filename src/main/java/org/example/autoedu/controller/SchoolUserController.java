@@ -18,13 +18,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/school-users")
 @RequiredArgsConstructor
-@Tag(name = "School Users", description = "Maktab va user bog'lanishlari")
+@Tag(name = "School Users", description = "Maktab va user boglanishlari")
 @SecurityRequirement(name = "bearerAuth")
 public class SchoolUserController {
 
     private final SchoolUserService schoolUserService;
 
-    @Operation(summary = "Maktabga user qo'shish (admin uchun)")
+    @Operation(summary = "Maktabga user qushish (admin uchun)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @PostMapping
     public ResponseEntity<SchoolUserResponse> addUserToSchool(@RequestBody SchoolUserAddRequest request) {
@@ -50,7 +50,7 @@ public class SchoolUserController {
         return ResponseEntity.ok(schoolUserService.getSchoolsByUser(userId));
     }
 
-    @Operation(summary = "Maktabdan userni o'chirish")
+    @Operation(summary = "Maktabdan userni uchirish")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @DeleteMapping
     public ResponseEntity<Void> removeUserFromSchool(@RequestBody SchoolUserRemoveRequest request) {

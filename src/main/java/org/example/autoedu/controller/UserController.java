@@ -33,14 +33,14 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @Operation(summary = "ID bo'yicha foydalanuvchi ma'lumotini olish")
+    @Operation(summary = "ID buyicha foydalanuvchi malumotini olish")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable Integer id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
-    @Operation(summary = "Yangi foydalanuvchi qo'shish (admin tomonidan)")
+    @Operation(summary = "Yangi foydalanuvchi qushish (admin tomonidan)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @PostMapping
     public ResponseEntity<UserResponse> createUser(@RequestBody UserCreateRequest request) {
@@ -48,7 +48,7 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Foydalanuvchi ma'lumotini yangilash")
+    @Operation(summary = "Foydalanuvchi malumotini yangilash")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> updateUser(
@@ -57,7 +57,7 @@ public class UserController {
         return ResponseEntity.ok(userService.updateUser(id, request));
     }
 
-    @Operation(summary = "Foydalanuvchini o'chirish")
+    @Operation(summary = "Foydalanuvchini uchirish")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
@@ -65,7 +65,7 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "Telefon raqami bo'yicha foydalanuvchi qidirish")
+    @Operation(summary = "Telefon raqami buyicha foydalanuvchi qidirish")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @GetMapping("/phone/{phoneNumber}")
     public ResponseEntity<UserResponse> getUserByPhoneNumber(@PathVariable String phoneNumber) {

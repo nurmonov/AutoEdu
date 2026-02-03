@@ -38,7 +38,7 @@ public class UserSubscribeController {
         return ResponseEntity.ok(userSubscribeService.getSubscriptionsByUser(userId));
     }
 
-    @Operation(summary = "Userning ma'lum bir obunasini olish")
+    @Operation(summary = "Userning malum bir obunasini olish")
     @GetMapping("/user/{userId}/subscribe-course/{subscribeCourseId}")
     public ResponseEntity<UserSubscribeResponse> getUserSubscription(
             @PathVariable Integer userId,

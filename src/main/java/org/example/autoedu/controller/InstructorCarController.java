@@ -31,13 +31,13 @@ public class InstructorCarController {
         return ResponseEntity.ok(instructorCarService.getAllInstructorCars());
     }
 
-    @Operation(summary = "ID bo'yicha mashina ma'lumotini olish")
+    @Operation(summary = "ID buyicha mashina malumotini olish")
     @GetMapping("/{id}")
     public ResponseEntity<InstructorCarResponse> getInstructorCarById(@PathVariable Integer id) {
         return ResponseEntity.ok(instructorCarService.getInstructorCarById(id));
     }
 
-    @Operation(summary = "Yangi mashina qo'shish (admin/instruktor uchun)")
+    @Operation(summary = "Yangi mashina qushish (admin/instruktor uchun)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN', 'INSTRUCTOR')")
     @PostMapping
     public ResponseEntity<InstructorCarResponse> createInstructorCar(@RequestBody InstructorCarRequest request) {
@@ -45,7 +45,7 @@ public class InstructorCarController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Mashina ma'lumotini yangilash")
+    @Operation(summary = "Mashina malumotini yangilash")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN', 'INSTRUCTOR')")
     @PutMapping("/{id}")
     public ResponseEntity<InstructorCarResponse> updateInstructorCar(
@@ -54,7 +54,7 @@ public class InstructorCarController {
         return ResponseEntity.ok(instructorCarService.updateInstructorCar(id, request));
     }
 
-    @Operation(summary = "Mashinani o'chirish")
+    @Operation(summary = "Mashinani uchirish")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteInstructorCar(@PathVariable Integer id) {

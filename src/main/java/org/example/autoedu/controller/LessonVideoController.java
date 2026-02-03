@@ -30,7 +30,7 @@ public class LessonVideoController {
         return ResponseEntity.ok(lessonVideoService.getAllLessonVideos());
     }
 
-    @Operation(summary = "ID bo'yicha video ma'lumotini olish")
+    @Operation(summary = "ID buyicha video malumotini olish")
     @GetMapping("/{id}")
     public ResponseEntity<LessonVideoResponse> getLessonVideoById(@PathVariable Integer id) {
         return ResponseEntity.ok(lessonVideoService.getLessonVideoById(id));
@@ -42,7 +42,7 @@ public class LessonVideoController {
         return ResponseEntity.ok(lessonVideoService.getVideosByLessonId(lessonId));
     }
 
-    @Operation(summary = "Yangi dars videosini qo'shish (admin uchun)")
+    @Operation(summary = "Yangi dars videosini qushish (admin uchun)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @PostMapping
     public ResponseEntity<LessonVideoResponse> createLessonVideo(@RequestBody LessonVideoCreateRequest request) {
@@ -59,7 +59,7 @@ public class LessonVideoController {
         return ResponseEntity.ok(lessonVideoService.updateLessonVideo(id, request));
     }
 
-    @Operation(summary = "Dars videosini o'chirish (admin uchun)")
+    @Operation(summary = "Dars videosini uchirish (admin uchun)")
     @PreAuthorize("hasAnyRole('SCHOOL_ADMIN', 'SUPER_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteLessonVideo(@PathVariable Integer id) {
