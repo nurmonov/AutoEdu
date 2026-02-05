@@ -31,7 +31,7 @@ public class Payment {
     @Column(precision = 12, scale = 2)
     private BigDecimal amount;
 
-    @Column(columnDefinition = "JSONB")
+
     private String paymentData;
 
     @Enumerated(EnumType.STRING)

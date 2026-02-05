@@ -35,18 +35,18 @@ public class OpenApiConfig {
                                         .name("Authorization")));
     }
 
-    @Bean
-    public OpenApiCustomizer headerCustomizer() {
-        return openApi -> openApi.getPaths().values().forEach(pathItem ->
-                pathItem.readOperations().forEach(operation ->
-                        operation.addParametersItem(
-                                new HeaderParameter()
-                                        .name("ngrok-skip-browser-warning")
-                                        .description("Ngrok browser warningni o'tkazib yuborish")
-                                        .required(false)
-                                        .schema(new StringSchema()._default("69420"))
-                        )
-                )
-        );
-    }
+//    @Bean
+//    public OpenApiCustomizer headerCustomizer() {
+//        return openApi -> openApi.getPaths().values().forEach(pathItem ->
+//                pathItem.readOperations().forEach(operation ->
+//                        operation.addParametersItem(
+//                                new HeaderParameter()
+//                                        .name("ngrok-skip-browser-warning")
+//                                        .description("Ngrok browser warningni o'tkazib yuborish")
+//                                        .required(false)
+//                                        .schema(new StringSchema()._default("69420"))
+//                        )
+//                )
+//        );
+//    }
 }

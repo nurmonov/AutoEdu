@@ -1,6 +1,5 @@
 package org.example.autoedu.service;
 
-
 import lombok.RequiredArgsConstructor;
 import org.example.autoedu.dto.course.CourseCreateRequest;
 import org.example.autoedu.dto.course.CourseResponse;
@@ -45,7 +44,7 @@ public class CourseService {
         Course course = courseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Kurs topilmadi: " + id));
 
-        // Qo'lda update (mapper ishlamagan bo'lsa)
+        // Qo'lda update (agar mapper ishlamasa)
         if (request.getFullName() != null) course.setFullName(request.getFullName());
         if (request.getTitle() != null) course.setTitle(request.getTitle());
         if (request.getDescription() != null) course.setDescription(request.getDescription());
@@ -64,6 +63,7 @@ public class CourseService {
         if (!courseRepository.existsById(id)) {
             throw new NoSuchElementException("Kurs topilmadi: " + id);
         }
+        // cascade bo'lgani uchun lessons va uploadedFiles avto o'chiriladi
         courseRepository.deleteById(id);
     }
 }
