@@ -37,11 +37,15 @@ public class Course {
     private String logo;
     private String location;
 
-    // Kursdagi barcha darslar
+
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Lesson> lessons = new ArrayList<>();
 
-    // Yordamchi metod (ixtiyoriy, qulaylik uchun)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "school_id")  // majburiy bo'lsa
+    private School school;
+
+
     public void addLesson(Lesson lesson) {
         this.lessons.add(lesson);
         lesson.setCourse(this);

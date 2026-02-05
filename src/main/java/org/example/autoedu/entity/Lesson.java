@@ -27,18 +27,14 @@ public class Lesson {
 
     private String file;  // agar kerak bo'lsa, eski maydon
 
-    // Dars qaysi kursga tegishli (majburiy)
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
-    // Bu darsga yuklangan barcha fayllar
+
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UploadedFile> uploadedFiles = new ArrayList<>();
 
-    // Yordamchi metod (ixtiyoriy, qulaylik uchun)
-    public void addFile(UploadedFile file) {
-        this.uploadedFiles.add(file);
-        file.setLesson(this);
-    }
+
 }

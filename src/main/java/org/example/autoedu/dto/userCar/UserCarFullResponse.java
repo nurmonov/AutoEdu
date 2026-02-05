@@ -10,6 +10,6 @@ import org.example.autoedu.dto.user.UserResponse;
 @Builder
 public class UserCarFullResponse {
     private Integer id;
-    private UserResponse user;               // user ma'lumotlari
-    private InstructorCarResponse instructorCar;  // instruktor mashinasi ma'lumotlari
+    private UserResponse user;
+    private InstructorCarResponse instructorCar;
 }

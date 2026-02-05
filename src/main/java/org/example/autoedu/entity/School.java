@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.autoedu.entity.enums.Status;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "school")
@@ -34,4 +36,7 @@ public class School {
     private String logo;
 
     private String location;
+
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Course> course;
 }

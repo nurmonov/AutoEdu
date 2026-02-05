@@ -5,8 +5,10 @@ import org.example.autoedu.dto.course.CourseCreateRequest;
 import org.example.autoedu.dto.course.CourseResponse;
 import org.example.autoedu.dto.course.CourseUpdateRequest;
 import org.example.autoedu.entity.Course;
+import org.example.autoedu.entity.School;
 import org.example.autoedu.mapper.CourseMapper;
 import org.example.autoedu.repo.CourseRepository;
+import org.example.autoedu.repo.SchoolRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,7 @@ public class CourseService {
 
     private final CourseRepository courseRepository;
     private final CourseMapper courseMapper;
+    private final SchoolRepository schoolRepository;
 
     @Transactional(readOnly = true)
     public List<CourseResponse> getAllCourses() {
@@ -35,6 +38,15 @@ public class CourseService {
     @Transactional
     public CourseResponse createCourse(CourseCreateRequest request) {
         Course course = courseMapper.toEntity(request);
+        if (request.getSchoolId() == null) {
+            throw new IllegalArgumentException("School ID majburiy!");
+        }
+
+        School school = schoolRepository.findById(request.getSchoolId())
+                .orElseThrow(() -> new NoSuchElementException("School topilmadi: " + request.getSchoolId()));
+
+        course.setSchool(school);  // <-- BU QATORNI QO'SHING!
+
         Course saved = courseRepository.save(course);
         return courseMapper.toResponse(saved);
     }
@@ -44,15 +56,17 @@ public class CourseService {
         Course course = courseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Kurs topilmadi: " + id));
 
-        // Qo'lda update (agar mapper ishlamasa)
-        if (request.getFullName() != null) course.setFullName(request.getFullName());
-        if (request.getTitle() != null) course.setTitle(request.getTitle());
-        if (request.getDescription() != null) course.setDescription(request.getDescription());
-        if (request.getPrice() != null) course.setPrice(request.getPrice());
-        if (request.getPhoto() != null) course.setPhoto(request.getPhoto());
-        if (request.getVideoCount() != null) course.setVideoCount(request.getVideoCount());
-        if (request.getLogo() != null) course.setLogo(request.getLogo());
-        if (request.getLocation() != null) course.setLocation(request.getLocation());
+        courseMapper.updateFromRequest(request, course);
+
+//        // Qo'lda update (agar mapper ishlamasa)
+//        if (request.getFullName() != null) course.setFullName(request.getFullName());
+//        if (request.getTitle() != null) course.setTitle(request.getTitle());
+//        if (request.getDescription() != null) course.setDescription(request.getDescription());
+//        if (request.getPrice() != null) course.setPrice(request.getPrice());
+//        if (request.getPhoto() != null) course.setPhoto(request.getPhoto());
+//        if (request.getVideoCount() != null) course.setVideoCount(request.getVideoCount());
+//        if (request.getLogo() != null) course.setLogo(request.getLogo());
+//        if (request.getLocation() != null) course.setLocation(request.getLocation());
 
         Course updated = courseRepository.save(course);
         return courseMapper.toResponse(updated);

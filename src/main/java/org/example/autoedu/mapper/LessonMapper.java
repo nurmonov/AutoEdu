@@ -11,9 +11,11 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface LessonMapper {
 
-    @Mapping(target = "course", ignore = true)  // course ni service da qo'yamiz
+    @Mapping(target = "course", ignore = true)  // create da service qo'yadi
     Lesson toEntity(LessonCreateRequest request);
 
+    // agar courseId ham kerak bo'lsa:
+    @Mapping(target = "courseId", source = "course.id")
     LessonResponse toResponse(Lesson lesson);
 
     @Mapping(target = "id", ignore = true)

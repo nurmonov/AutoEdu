@@ -13,11 +13,11 @@ public interface CourseMapper {
 
     Course toEntity(CourseCreateRequest request);
 
+    @Mapping(target = "schoolId", source = "school.id")   // <-- BU QATORNI QO'SHING!
     CourseResponse toResponse(Course course);
 
     @Mapping(target = "id", ignore = true)
     void updateFromRequest(CourseUpdateRequest request, @MappingTarget Course course);
 
-    // Agar ro'yxat kerak bo'lsa
     List<CourseResponse> toResponseList(List<Course> courses);
 }
